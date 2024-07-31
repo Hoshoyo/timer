@@ -50,8 +50,9 @@ timer_cb_create(Timer_Callback* timer, const char* name, uint64_t interval_ns, v
     timer->name = name;
 
     struct sigevent sev = { 0 };
-    sev.sigev_notify = SIGEV_SIGNAL;
+    sev.sigev_notify = SIGEV_SIGNAL|SIGEV_THREAD_ID;
     sev.sigev_signo = SIGRTMIN;
+    sev._sigev_un._tid = gettid();
     sev.sigev_value.sival_ptr = timer;
 
     int result = timer_create(CLOCK_REALTIME, &sev, &timer->id);
