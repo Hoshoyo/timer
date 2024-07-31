@@ -81,7 +81,7 @@ timer_cb_time_until_next(Timer_Callback* timer)
 int
 timer_cb_reset(Timer_Callback* timer)
 {
-    timer_cb_set_interval(timer, (uint64_t)NANOSECONDS_IN_SECOND * 5);
+    timer_cb_set_interval(timer, timer->interval_ns);
     return 0;
 }
 

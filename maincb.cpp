@@ -4,7 +4,7 @@
 uint64_t
 timer_ms_to_ns(uint64_t ms)
 {
-	return ms * 1000 * 1000;
+    return ms * 1000 * 1000;
 }
 
 typedef struct {
@@ -29,7 +29,7 @@ on_timer(Timer_Callback* timer)
 int main()
 {
     Timer_Data data = {0};
-	Timer_Callback timer;
+    Timer_Callback timer;
     timer.data = &data;
 
     timer_cb_create(&timer, "teste", timer_ms_to_ns(1000), on_timer);
@@ -45,5 +45,5 @@ int main()
         usleep(1000 * 100);
     }
 
-	return 0;
+    return 0;
 }
