@@ -19,7 +19,7 @@ int main()
 			printf("Elapsed %lld ns\n", ns_elapsed);
 		}
 
-		Sleep(100);
+		//Sleep(100);
 		//Sleep(1000);
 	}
 
