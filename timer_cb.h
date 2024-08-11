@@ -8,6 +8,10 @@
 #define NOGDI             // All GDI defines and routines
 #include <windows.h>
 typedef UINT_PTR timer_t;
+#elif defined(__linux__)
+#include <time.h>
+#include <signal.h>
+#include <unistd.h>
 #endif
 
 typedef struct Timer_Callback_t {
@@ -118,8 +122,6 @@ timer_cb_time_until_next(Timer_Callback* timer)
 }
 
 #elif defined(__linux__)
-
-#include <time.h>
 
 static void
 timer_cb_internal_handler(int sig, siginfo_t* si, void* uc)

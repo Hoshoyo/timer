@@ -63,9 +63,6 @@ int main()
     timer.data = &data;
 
     timer_cb_create(&timer, "teste", timer_ms_to_ns(1000), on_timer);
-    Sleep(200);
-
-    uint64_t t = timer_cb_time_until_next(&timer);
 
     while (true)
     {
@@ -73,15 +70,15 @@ int main()
         uint64_t next_ns = timer_cb_time_until_next(&timer);
         printf("Time until next (ns): %lld\n", next_ns);
 #endif
+#if defined(__linux__)
+        usleep(1000 * 10);
+#else
         MSG msg = { 0 };
         while(PeekMessageA(&msg, 0, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&msg);
             DispatchMessageA(&msg);
         }
-#if 0
-        //usleep(1000 * 100);
-#else
         Sleep(10);
 #endif
     }

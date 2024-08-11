@@ -1,3 +1,4 @@
+#define TIMER_CALLBACK_IMPLEMENTATION
 #include "timer_cb.h"
 #include <stdio.h>
 
@@ -42,7 +43,17 @@ int main()
         #endif
 
         //sleep(1);
+#if defined(__linux__)
         usleep(1000 * 100);
+#else
+        MSG msg = { 0 };
+        while(PeekMessageA(&msg, 0, 0, 0, PM_REMOVE))
+        {
+            TranslateMessage(&msg);
+            DispatchMessageA(&msg);
+        }
+        Sleep(100);
+#endif
     }
 
     return 0;
